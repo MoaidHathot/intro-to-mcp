@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-mcp-server", "sample-mcp-server\sample-mcp-server.csproj", "{4F4BE406-784C-40AE-A164-7D7EBAED414F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample-mcp-client", "sample-mcp-client\sample-mcp-client.csproj", "{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{4F4BE406-784C-40AE-A164-7D7EBAED414F}.Release|x64.Build.0 = Release|Any CPU
 		{4F4BE406-784C-40AE-A164-7D7EBAED414F}.Release|x86.ActiveCfg = Release|Any CPU
 		{4F4BE406-784C-40AE-A164-7D7EBAED414F}.Release|x86.Build.0 = Release|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Debug|x64.Build.0 = Debug|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Debug|x86.Build.0 = Debug|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Release|x64.ActiveCfg = Release|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Release|x64.Build.0 = Release|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Release|x86.ActiveCfg = Release|Any CPU
+		{0F6B7E56-915B-4676-9B4A-A14AAE859CA4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

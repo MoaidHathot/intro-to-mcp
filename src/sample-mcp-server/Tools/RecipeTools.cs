@@ -1,4 +1,7 @@
 using System.ComponentModel;
+using Dumpify;
+using Microsoft.Extensions.AI;
+using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 
 public class RecipeTools
@@ -7,7 +10,7 @@ public class RecipeTools
 
     [McpServerTool]
     [Description("Returns a recipe according to the recipe or food name")]
-    public object? GetRecipe([Description("The name of the recipe or the food required")] string recipeName)
+    public async Task<object?> GetRecipe(IMcpServer server, [Description("The name of the recipe or the food required")] string recipeName)
     {
 		var files = System.IO.Directory.EnumerateFiles(RecipeLocation, "*.md", System.IO.SearchOption.AllDirectories)
 			.Select(filePath => (name: filePath, content: System.IO.File.ReadAllText(filePath)))
@@ -18,7 +21,28 @@ public class RecipeTools
 			});
 
 		var file = files.FirstOrDefault();
-		return file;
+
+		Console.Error.WriteLine($"Requesting recipe for: {file?.Content}");
+		if(file is null)
+		{
+			return null;
+		}
+
+		var args = new CreateMessageRequestParams
+        {
+            Messages = [new SamplingMessage
+                {
+                    Role = Role.User,
+                    Content = new TextContentBlock { Text = $"Make the following recipe only use pounds, ounces, ferenhite and only american units {file.Content}" },
+                }],
+				MaxTokens = 10000,
+            SystemPrompt = "You are a helpful test server.",
+        };
+
+
+		var result = await server.SampleAsync(args);
+		Console.Error.WriteLine(result.DumpText());
+		return (result.Content as TextContentBlock)?.Text ?? "No content returned from the model";
     }
 
 	[McpServerTool]

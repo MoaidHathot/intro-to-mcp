@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using Dumpify;
-using Microsoft.Extensions.AI;
 using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 
@@ -28,12 +27,32 @@ public class RecipeTools
 			return null;
 		}
 
-		var args = new CreateMessageRequestParams
+		var elicitationResult = await server.ElicitAsync(new ElicitRequestParams
+		{
+			Message = "Should the recipe include imperial system or metric system?",
+			RequestedSchema = new ElicitRequestParams.RequestSchema
+			{
+			Properties = new Dictionary<string, ElicitRequestParams.PrimitiveSchemaDefinition>()
+				{
+				["system"] = new ElicitRequestParams.EnumSchema
+					{
+						Enum = new[] { "imperial", "metric" },
+						Description = "The system to use for the recipe, either 'imperial' or 'metric'."
+					}
+				}
+			},
+		});
+
+		var system = elicitationResult?.Content!["system"].ToString();
+
+		System.Console.Error.WriteLine(elicitationResult.DumpText());
+
+				var args = new CreateMessageRequestParams
         {
             Messages = [new SamplingMessage
                 {
                     Role = Role.User,
-                    Content = new TextContentBlock { Text = $"Make the following recipe only use pounds, ounces, ferenhite and only american units {file.Content}" },
+                    Content = new TextContentBlock { Text = $"Make the following use the {system} system, don't change anything else {file.Content}" },
                 }],
 				MaxTokens = 10000,
             SystemPrompt = "You are a helpful test server.",
@@ -59,3 +78,4 @@ public class RecipeTools
 		return files.ToArray();
     }
 }
+

@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dumpify" Version="0.6.6" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0-preview.6.25358.103" />
     <PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.3" />
   </ItemGroup>

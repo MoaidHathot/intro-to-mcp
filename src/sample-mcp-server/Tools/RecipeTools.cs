@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using Dumpify;
 using ModelContextProtocol.Server;
 
 public class RecipeTools
@@ -20,5 +19,19 @@ public class RecipeTools
 
 		var file = files.FirstOrDefault();
 		return file;
+    }
+
+	[McpServerTool]
+    [Description("Returns a recipe according to the recipe or food name")]
+    public object[] GetAllRecipes()
+    {
+		var files = System.IO.Directory.EnumerateFiles(RecipeLocation, "*.md", System.IO.SearchOption.AllDirectories)
+			.Select(filePath => (name: filePath, content: System.IO.File.ReadAllText(filePath)))
+			.Select(tuple => new { 
+				Name = System.IO.Path.GetFileNameWithoutExtension(tuple.name), 
+				Content = tuple.content 
+			});
+
+		return files.ToArray();
     }
 }
